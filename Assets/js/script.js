@@ -1,11 +1,14 @@
 $(document).ready(function () {
-  //   const date = new Date();
+  // To get the current date and time
   const hour = moment().hour();
 
+  //  set the time runing interval by 1 seond and display the date and time as a local time same as computer
   setInterval(() => {
     $("#currentDay").text(new Date().toString().replace(/ GMT.+\)/, ""));
   }, 1000);
 
+  // use for loop and if then else short-cut function to set one day calendar from 9AM to 5PM with changing colors in text cell by current time as past, present , and future
+  //  append <div> , <textarea>,and <button> elements to their parent <div> with class="container"
   for (let index = 9; index < 18; index++) {
     $(".container").append(`
     <div class="row time-block">
@@ -17,11 +20,15 @@ $(document).ready(function () {
   } description"></textarea>
   <button class="col-2 saveBtn"><i class="far fa-save"></i></button>
 </div>`);
+    // added one icon with button element to inform that this is the save button
   }
 
   let taskContent = $(".description");
   let saveButton = $(".saveBtn");
 
+  //
+
+  // use each() method and for loop function to get each task value as well as paired with local hours were stored in local storeage
   taskContent.each(function () {
     for (let index = 0; index < localStorage.length; index++) {
       let localStorageKey = localStorage.key(index);
@@ -34,7 +41,7 @@ $(document).ready(function () {
     }
   });
 
-  // Function to save task input once the save button is clicked.
+  // time and task content are stored in the local storage when click save button
   function saveTasks() {
     let currentTime = $(this).data("hour");
     let taskHour = $(this).siblings(".hour").text();
